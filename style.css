@@ -1,0 +1,116 @@
+/* Пользовательские стили для премиального внешнего вида */
+body {
+    font-family: 'Open Sans', sans-serif; /* Новый шрифт для основного текста */
+    background-color: #0a0a0a; /* Глубокий черный фон */
+    color: #e5e5e5; /* Светло-серый текст для контраста */
+    overflow-x: hidden;
+    cursor: auto; /* Возвращаем стандартный курсор */
+}
+
+/* Стиль для деловых заголовков */
+.font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Эффект "Аврора" */
+.aurora-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Позади частиц */
+    pointer-events: none;
+}
+
+.aurora-background::before {
+    content: '';
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background-image: radial-gradient(circle, rgba(88, 81, 219, 0.15) 0%, rgba(88, 81, 219, 0) 60%);
+    border-radius: 50%;
+    transition: transform 5s ease-out, opacity 5s ease-out;
+    transform: translate(var(--x, -50%), var(--y, -50%));
+    opacity: 0;
+}
+
+body:hover .aurora-background::before {
+    opacity: 1;
+}
+
+/* Холст для частиц */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Между Авророй и контентом */
+    pointer-events: none;
+}
+
+/* Анимация плавного появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-on-scroll {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-play-state: paused;
+}
+
+/* Стили для галереи */
+.gallery-item {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px rgba(88, 81, 219, 0.3);
+    border-color: rgba(88, 81, 219, 0.5);
+}
+
+.gallery-image {
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.05);
+}
+
+/* Стили для модального окна */
+.modal { transition: opacity 0.3s ease; }
+.modal-content {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    transition: transform 0.3s ease;
+}
+.modal-close-btn {
+    background-color: #f0f0f0;
+    color: #101010;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.modal-close-btn:hover {
+    transform: scale(1.1);
+    background-color: #ffffff;
+}
+
+/* Анимация букв в заголовке */
+#animated-firstname span, #animated-lastname span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    animation: letterFadeIn 0.5s ease-out forwards;
+}
+
+@keyframes letterFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
