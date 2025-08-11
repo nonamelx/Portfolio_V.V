@@ -1,16 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     const artworks = [
-        { src: '1.jpg', caption: '2022 год. Карандаш и тушь' },
-        { src: '2.jpg', caption: '2020 год, маркеры и линеры' },
-        { src: '3.jpg', caption: '2023 год. Акварель и гуашь' },
-        { src: '4.jpg', caption: '2023 год. Гуашь' },
-        { src: '5.jpg', caption: '2021 год. Акварель и гуашь' },
-        { src: '6.jpg', caption: '2025 год. Гуашь' },
-        { src: '7.jpg', caption: '2024 год. Акрил' },
-        { src: '8.jpg', caption: '2025 год. Акрил' },
-        { src: '9.jpg', caption: '2024 год. Акварель' },
-        { src: '10.jpg', caption: '2025 год. Гуашь' }
+        { src: '1.jpg', caption: '2022 год. Карандаш и тушь', year: 2022 },
+        { src: '2.jpg', caption: '2020 год, маркеры и линеры', year: 2020 },
+        { src: '3.jpg', caption: '2023 год. Акварель и гуашь', year: 2023 },
+        { src: '4.jpg', caption: '2023 год. Гуашь', year: 2023 },
+        { src: '5.jpg', caption: '2021 год. Акварель и гуашь', year: 2021 },
+        { src: '6.jpg', caption: '2025 год. Гуашь', year: 2025 },
+        { src: '7.jpg', caption: '2024 год. Акрил', year: 2024 },
+        { src: '8.jpg', caption: '2025 год. Акрил', year: 2025 },
+        { src: '9.jpg', caption: '2024 год. Акварель', year: 2024 },
+        { src: '10.jpg', caption: '2025 год. Гуашь', year: 2025 }
     ];
+
+    artworks.sort((a, b) => b.year - a.year);
 
     const gallery = document.getElementById('gallery');
     const modal = document.getElementById('modal');
@@ -19,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalCaption = document.getElementById('modal-caption');
     const modalClose = document.getElementById('modal-close');
     
-    // --- АНИМАЦИЯ ЗАГОЛОВКА ---
     const animateSpan = (elementId, text, delay = 0) => {
         const el = document.getElementById(elementId);
         if (!el) return;
@@ -33,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
     animateSpan('animated-firstname', firstName, 0);
     animateSpan('animated-lastname', lastName, firstName.length * 50);
 
-    // --- ЗАПОЛНЕНИЕ ГАЛЕРЕИ ---
     artworks.forEach((art, index) => {
         const item = document.createElement('div');
         item.className = 'gallery-item rounded-lg overflow-hidden shadow-lg cursor-pointer flex flex-col fade-in-on-scroll';
@@ -79,14 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Escape') closeModal();
     });
 
-    // --- ЭФФЕКТ "АВРОРА" ---
     const aurora = document.querySelector('.aurora-background');
     document.body.addEventListener('mousemove', e => {
         aurora.style.setProperty('--x', e.clientX + 'px');
         aurora.style.setProperty('--y', e.clientY + 'px');
     });
     
-    // --- АНИМАЦИЯ ПРИ ПРОКРУТКЕ ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -100,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    // --- ИНТЕРАКТИВНЫЙ ФОН С ЧАСТИЦАМИ ---
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -111,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mouse = {
         x: null,
         y: null,
-        radius: 100 // Радиус влияния курсора
+        radius: 100
     };
 
     window.addEventListener('mousemove', function(event) {
@@ -131,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-            ctx.fillStyle = 'rgba(177, 171, 255, 0.2)'; // Сделаем частицы менее заметными
+            ctx.fillStyle = 'rgba(177, 171, 255, 0.2)';
             ctx.fill();
         }
         update() {
@@ -149,7 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initParticles() {
         particlesArray = [];
-        // Оптимизация для мобильных: меньше частиц на маленьких экранах
         let numberOfParticles = (canvas.height * canvas.width) / (window.innerWidth < 768 ? 20000 : 9000);
         for (let i = 0; i < numberOfParticles; i++) {
             let size = (Math.random() * 2) + 1;

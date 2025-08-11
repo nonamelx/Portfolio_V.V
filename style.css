@@ -1,25 +1,22 @@
-/* Пользовательские стили для премиального внешнего вида */
 body {
-    font-family: 'Open Sans', sans-serif; /* Новый шрифт для основного текста */
-    background-color: #0a0a0a; /* Глубокий черный фон */
-    color: #e5e5e5; /* Светло-серый текст для контраста */
+    font-family: 'Roboto', sans-serif;
+    background-color: #0a0a0a;
+    color: #e5e5e5;
     overflow-x: hidden;
-    cursor: auto; /* Возвращаем стандартный курсор */
+    cursor: auto;
 }
 
-/* Стиль для деловых заголовков */
-.font-montserrat {
-    font-family: 'Montserrat', sans-serif;
+.font-roboto-slab {
+    font-family: 'Roboto Slab', serif;
 }
 
-/* Эффект "Аврора" */
 .aurora-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2; /* Позади частиц */
+    z-index: -2;
     pointer-events: none;
 }
 
@@ -39,18 +36,16 @@ body:hover .aurora-background::before {
     opacity: 1;
 }
 
-/* Холст для частиц */
 #particle-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Между Авророй и контентом */
+    z-index: -1;
     pointer-events: none;
 }
 
-/* Анимация плавного появления */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -62,7 +57,6 @@ body:hover .aurora-background::before {
     animation-play-state: paused;
 }
 
-/* Стили для галереи */
 .gallery-item {
     background-color: #1a1a1a;
     border: 1px solid #2a2a2a;
@@ -83,7 +77,6 @@ body:hover .aurora-background::before {
     transform: scale(1.05);
 }
 
-/* Стили для модального окна */
 .modal { transition: opacity 0.3s ease; }
 .modal-content {
     background-color: #1a1a1a;
@@ -100,7 +93,6 @@ body:hover .aurora-background::before {
     background-color: #ffffff;
 }
 
-/* Анимация букв в заголовке */
 #animated-firstname span, #animated-lastname span {
     display: inline-block;
     opacity: 0;
